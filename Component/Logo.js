@@ -3,7 +3,7 @@ import React from "react";
 const Logo = () => {
   return (
     <>
-      <div className="logo pt-[12px] ml-[12px] cursor-pointer ">
+      <div className="logo pt-[12px] ml-[12px] cursor-pointer z-[1000] ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="115"

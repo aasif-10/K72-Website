@@ -4,6 +4,7 @@ import gsap from "gsap";
 import React, { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HiHeart } from "react-icons/hi";
+import { motion, useAnimation } from "framer-motion";
 
 const page = () => {
   const team = [
@@ -154,8 +155,26 @@ const page = () => {
         scrub: true,
       },
     });
+
+    gsap.from(".image-container-overlay", {
+      scaleX: 1,
+      duration: 0.7,
+      ease: "power1.inOut",
+      transformOrigin: "right",
+    });
+
+    gsap.from(".heading-elem", {
+      y: "-100%",
+      stagger: 0.2,
+      duration: 0.8,
+      ease: "power1.inOut",
+    });
   });
 
+  const imageCard = useAnimation();
+  const elementHovered = () => {
+    console.log("hovered");
+  };
   return (
     <>
       <div className="main relative">
@@ -175,15 +194,20 @@ const page = () => {
         </div>
         <div className="page1 w-full min-h-screen ">
           <div
-            className="image-container absolute w-[230px] h-[295px] bg-red-400
+            className="image-container absolute w-[230px] h-[295px] 
           
-          left-[420px] top-[180px] rounded-[26px] overflow-hidden
+          left-[420px] top-[180px] rounded-[26px] overflow-hidden bg-white border-white border-[1px]
           
           "
           >
+            <div
+              className="image-container-overlay scale-x-0 w-full h-full absolute border-[1px]  bg-white border-white  overflow-hidden
+          
+          "
+            ></div>
             <img
               ref={imageRef}
-              className="w-full h-full"
+              className="w-full h-full z-[999]"
               src="https://k72.ca/uploads/teamMembers/MAXIME_480X640_2-480x640.jpg"
               alt=""
             />
@@ -195,15 +219,15 @@ const page = () => {
                 className="navbar-links fixed flex"
                 style={{ fontFamily: "Lausanne_250, sans-serif" }}
               >
-                <div className="cursor-pointer relative group  h-fit">
+                <div className="nav-elem cursor-pointer relative group  h-fit">
                   <div className="absolute top-0 left-0   border-[#d3fd50]  w-[300px] h-[0px] bg-[#d3fd50] group-hover:h-[55px] transition-all duration-300 ease-in-out  "></div>
-                  <div className="nb projectBar border-[1px] border-black flex items-baseline-last w-[300px] h-[55px] bg-black text-white font-[600] text-[19px] pl-[10px]">
+                  <div className="a nb projectBar border-[1px] border-black flex items-baseline-last w-[300px] h-[55px] bg-black text-white font-[600] text-[19px] pl-[10px]">
                     <h2 className="head uppercase z-[2] group-hover:text-black transition-all duration-300 ease-in-out">
                       projects
                     </h2>
                   </div>
                 </div>
-                <div className="cursor-pointer relative group h-fit">
+                <div className="nav-elem cursor-pointer relative group h-fit">
                   <div className="absolute top-0 left-0  border-[#d3fd50]  w-[450px] h-[0px] bg-[#d3fd50] text-white  font-[600] text-[19px] pl-[10px] group-hover:h-[90px] transition-all duration-300 ease-in-out"></div>
                   <div className="nb agenceBar border-[1px] border-black flex items-baseline-last w-[450px] h-[90px] bg-black text-white  font-[600] text-[19px] pl-[10px]">
                     <h2 className="head uppercase z-[2] group-hover:text-black transition-all duration-300 ease-in-out">
@@ -211,7 +235,7 @@ const page = () => {
                     </h2>
                   </div>
                 </div>
-                <div className=" cursor-pointer relative group h-fit ">
+                <div className="nav-elem cursor-pointer relative group h-fit ">
                   <div className=" absolute top-0 right-0 z-[999] border-[#d3fd50]  w-[250px] h-[55px] bg-black block  group-hover:hidden "></div>
 
                   <div className=" absolute top-0 left-0 border-[#d3fd50]  w-[250px] h-[0px] bg-[#d3fd50] text-white  font-[600] text-[19px] pl-[10px] group-hover:h-[130px] transition-all duration-300 ease-in-out"></div>
@@ -225,19 +249,26 @@ const page = () => {
               </div>
             </div>
 
-            <div className="heading mt-[500px]">
-              <h1
-                style={{ fontFamily: "Lausanne_250, sans-serif" }}
-                className="text-[300px] uppercase font-[600] leading-[50px] "
-              >
-                Soixan7e
-              </h1>
-              <h1
-                style={{ fontFamily: "Lausanne_250, sans-serif" }}
-                className="text-[300px] uppercase font-[600] ml-[250px] "
-              >
-                Douze
-              </h1>
+            <div className="heading mt-[340px]">
+              <div className="  w-full overflow-hidden">
+                <h1
+                  style={{ fontFamily: "Lausanne_250, sans-serif" }}
+                  className="heading-elem text-[300px] uppercase font-[600] leading-none "
+                >
+                  Soixan7e
+                </h1>
+              </div>
+
+              <div>
+                <div className="  w-full overflow-hidden">
+                  <h1
+                    style={{ fontFamily: "Lausanne_250, sans-serif" }}
+                    className="heading-elem text-[300px] uppercase font-[600] ml-[250px] leading-none "
+                  >
+                    Douze
+                  </h1>
+                </div>
+              </div>
             </div>
 
             <div className="heading-desc w-[98%] flex flex-col items-end ">
@@ -290,7 +321,85 @@ const page = () => {
             </div>
           </div>
         </div>
-        <div className="page2 w-full min-h-screen flex flex-col justify-center items-center mt-[400px] ">
+        <div className="page2 w-full min-h-screen flex flex-col justify-center items-center mt-[400px] relative overflow-hidden">
+          <div
+            style={{ fontFamily: "Lausanne_250, sans-serif" }}
+            className="absolute  top-30 left-10 flex flex-col gap-[100px]"
+          >
+            <motion.div
+              initial={{ x: "0%" }}
+              animate={{ x: "-100%" }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 30, // adjust speed
+                  ease: "linear",
+                },
+              }}
+              className="flex items-center  gap-[200px]"
+            >
+              <h1 className="text-[130px] font-bold   text-[#d2fc50] ">JOEL</h1>
+              <h1 className="text-[130px] font-bold   text-[#d2fc50] ml-[1000px]">
+                JOEL
+              </h1>
+              <h1 className="text-[130px] font-bold   text-[#d2fc50] ml-[1000px]">
+                JOEL
+              </h1>
+              <h1 className="text-[130px] font-bold   text-[#d2fc50] ml-[1000px]">
+                JOEL
+              </h1>
+            </motion.div>
+
+            <div className="w-full overflow-hidden relative z-[999]">
+              <motion.div
+                initial={{ x: "0%" }}
+                animate={{ x: "-100%" }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    duration: 30, // adjust speed
+                    ease: "linear",
+                  },
+                }}
+                className="flex z-20 items-baseline "
+              >
+                <div className="flex z-20 items-baseline gap-[80px] mr-[1000px]">
+                  <h1 className="text-[130px] font-bold text-[#d2fc50]  ">
+                    LETARTE
+                  </h1>
+                  <h2 className="uppercase text-[30px] whitespace-nowrap">
+                    Directeur de création adjoint
+                  </h2>
+                </div>
+                <div className="flex z-20 items-baseline gap-[80px] mr-[1000px]">
+                  <h1 className="text-[130px] font-bold text-[#d2fc50]  ">
+                    LETARTE
+                  </h1>
+                  <h2 className="uppercase text-[30px] whitespace-nowrap">
+                    Directeur de création adjoint
+                  </h2>
+                </div>
+                <div className="flex z-20 items-baseline gap-[80px] mr-[1000px]">
+                  <h1 className="text-[130px] font-bold text-[#d2fc50]  ">
+                    LETARTE
+                  </h1>
+                  <h2 className="uppercase text-[30px] whitespace-nowrap">
+                    Directeur de création adjoint
+                  </h2>
+                </div>
+                <div className="flex z-20 items-baseline gap-[80px] mr-[1000px]">
+                  <h1 className="text-[130px] font-bold text-[#d2fc50]  ">
+                    LETARTE
+                  </h1>
+                  <h2 className="uppercase text-[30px] whitespace-nowrap">
+                    Directeur de création adjoint
+                  </h2>
+                </div>
+              </motion.div>
+            </div>
+          </div>
           <div className="image-container-1 w-[480px] h-[720px] bg-red-400  rounded-[20px] overflow-hidden">
             <img
               className="w-full h-full"
@@ -330,11 +439,19 @@ const page = () => {
               </div>
             );
           })}
+          <motion.div
+            onHoverStart={() => {
+              console.log("hi");
+            }}
+            className="relative group "
+          >
+            <motion.div
+              onHoverStart={elementHovered}
+              className="absolute top-0 left-0  w-full h-[0px] bg-[#d2fc50]  group-hover:h-[80px] transition-all duration-300 ease-in-out z-[1] pointer-events-none"
+            ></motion.div>
 
-          <div className="relative group">
-            <div className="absolute top-0 left-0 div w-full h-[0px] bg-[#d2fc50]  group-hover:h-[80px] transition-all duration-300 ease-in-out z-[1]"></div>
-
-            <div
+            <motion.div
+              onHoverStart={elementHovered}
               style={{ fontFamily: "Lausanne_250, sans-serif" }}
               className="vertical-divs w-full h-[80px] flex justify-between items-start border-t-[1px]  border-b-[1px] pt-[10px] px-[18px] group-hover:text-black transition-all duration-300 ease-in-out group-hover:border-none "
             >
@@ -347,8 +464,8 @@ const page = () => {
               <h1 className="uppercase font-[600] text-[40px] mt-[5px] z-[2]">
                 Sébastien Roy
               </h1>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         <div
