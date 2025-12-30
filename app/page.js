@@ -37,6 +37,7 @@ const page = () => {
                 viewBox="0 0 256 256"
               >
                 <g
+                  className="hover:fill-[#d3fd50]"
                   fill="#ffffff"
                   fillRule="nonzero"
                   stroke="none"
@@ -287,9 +288,18 @@ const page = () => {
               <div
                 onClick={showOverlayNow}
                 className="menu bg-black h-[50px] w-[250px] flex flex-col justify-center items-end
-              pr-[40px]
+              pr-[40px] relative group
             "
-              ></div>
+              >
+                <div
+                  className="absolute top-0 left-0 bg-[#d3fd50] h-0 w-full group-hover:h-full transition-all duration-300 ease-in-out
+            "
+                ></div>
+                <div className="flex flex-col items-end relative z-[998]">
+                  <div className="h-[1.5px] w-[60px] bg-[#d5d5d5] group-hover:bg-black"></div>
+                  <div className="h-[1.5px] w-[30px] bg-[#d5d5d5] mt-[4px] group-hover:bg-black"></div>
+                </div>
+              </div>
             </div>
 
             <TopText></TopText>
